@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">FateByDate</string>
+    <string name="app_name">Предназначение</string>
     <string name="choose_date">Укажите дату Вашего рождения</string>
-    <string name="action_settings">Настройки</string>
+    <string name="action_exit">Выход</string>
     <string name="fate">УЗНАТЬ ПРЕДНАЗНАЧЕНИЕ</string>
     <string name="fate_title">Ваше предназначение</string>
 
