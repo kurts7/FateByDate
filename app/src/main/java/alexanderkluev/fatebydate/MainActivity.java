@@ -1,15 +1,19 @@
 package alexanderkluev.fatebydate;
 
 import android.content.Intent;
+import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.LinearLayout;
 
 import alexanderkluev.fatebydate.R;
+import com.google.android.gms.ads.*;
 
 import java.util.Calendar;
 
@@ -22,6 +26,8 @@ public class MainActivity extends ActionBarActivity {
     private int year;
     private int month;
     private int day;
+
+    private AdView adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +55,15 @@ public class MainActivity extends ActionBarActivity {
                 startActivity(intent);
             }
         });
+
+        AdView adView = (AdView)this.findViewById(R.id.adView);
+
+        AdRequest adRequest =new com.google.android.gms.ads.AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice("e2ae6d65c5bc0ad2").build();
+
+        //AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
 
     }
 

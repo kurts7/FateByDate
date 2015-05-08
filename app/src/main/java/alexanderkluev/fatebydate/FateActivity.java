@@ -8,6 +8,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+
 import alexanderkluev.fatebydate.R;
 
 /**
@@ -16,17 +19,36 @@ import alexanderkluev.fatebydate.R;
 public class FateActivity extends Activity {
 
     private Button btnShowMain;
+    private InterstitialAd interstitial;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fate);
 
+        // Создаём межстраничное объявление
+        interstitial = new InterstitialAd(this);
+        interstitial.setAdUnitId("ca-app-pub-1177132318340542/8371468917");
+        // Создаём запрос к AdMob
+
+        AdRequest adRequesti = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice("e2ae6d65c5bc0ad2")
+                .build();
+
+        //AdRequest adRequesti = new AdRequest.Builder().build();
+        // Начинаем загружать объявление
+        interstitial.loadAd(adRequesti);
+
         btnShowMain = (Button)findViewById(R.id.button2);
         btnShowMain.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
+
+                if (interstitial.isLoaded()) {
+                    interstitial.show();
+                }
 
                 Intent intent = new Intent(FateActivity.this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -35,6 +57,7 @@ public class FateActivity extends Activity {
             }
         });
     }
+
 
     @Override
     protected void onResume() {
