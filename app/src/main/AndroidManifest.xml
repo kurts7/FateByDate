@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.alexanderkluev.fatebydate" >
+    package="alexanderkluev.fatebydate" >
 
     <application
         android:allowBackup="true"
@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name="alexanderkluev.fatebydate.MainActivity"
             android:screenOrientation="portrait"
             android:label="@string/app_name" >
             <intent-filter>
@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FateActivity"
+            android:name="alexanderkluev.fatebydate.FateActivity"
             android:screenOrientation="portrait"
             android:label="@string/app_name">
         </activity>
