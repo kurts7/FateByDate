@@ -2,7 +2,7 @@
     <string name="app_name">Предназначение</string>
     <string name="choose_date">Укажите дату Вашего рождения</string>
     <string name="action_exit">Выход</string>
-    <string name="fate">УЗНАТЬ ПРЕДНАЗНАЧЕНИЕ</string>
+    <string name="fate2">Узнать предназначение</string>
     <string name="fate_title">Ваше предназначение</string>
 
     <string name="mage_title">Маг</string>
@@ -79,5 +79,17 @@
     <string name="unknown">Ваше предназначение не определено.</string>
 
     <string name="your_card">Ваша карта</string>
-    <string name="toChooseDate">К ВЫБОРУ ДАТЫ</string>
+    <string name="toChooseDate">Главная</string>
+    <string name="specify_date_of_birth">Укажите дату рождения</string>
+    <string name="showResult">Далее</string>
+
+    <string name="main_text_first_one">Зачем я был рожден?</string>
+    <string name="main_text_first_two">Чем я должен заниматься?</string>
+    <string name="main_text_first_three">Какую профессию я должен освоить?</string>
+    <string name="main_text_first_four">Каким я должен остаться в памяти своих родных и потомков после смерти?</string>
+    <string name="main_text_first_last">Знаете ли Вы ответы на подобные вопросы...</string>
+
+    <string name="main_text_second_one">Если у Вас уже есть ответы и они вдохновляют Вас каждый день, то значит Вы знаете свое предназначение и Вам остается лишь реализовать его.</string>
+    <string name="main_text_second_two">Если же не знаете, то данное приложение, опираясь на дату Вашего роджения поможет определить его.</string>
+
 </resources>

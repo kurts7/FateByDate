@@ -1,27 +1,35 @@
 package alexanderkluev.fatebydate;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
-import android.provider.Settings;
-import android.support.v7.app.ActionBarActivity;
+import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.LinearLayout;
+import android.widget.TextView;
 
-import alexanderkluev.fatebydate.R;
-import com.google.android.gms.ads.*;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.util.Calendar;
+
+import alexanderkluev.fatebydate.support.TextViewPlus;
 
 
 public class MainActivity extends ActionBarActivity {
 
     private DatePicker pickerDate;
     private Button btnShowFate;
+    final Context context = this;
+    //final String custom_font = "fonts/xc5CYoHu.ttf";
+    final String custom_font = "fonts/ex_one.ttf";
 
     private int year;
     private int month;
@@ -34,27 +42,95 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        pickerDate = (DatePicker) findViewById(R.id.datePicker);
+        final Typeface CF = Typeface.createFromAsset(getAssets(), custom_font);
 
-        Calendar today = Calendar.getInstance();
+        btnShowFate = (Button) findViewById(R.id.find_your_goal_btn);
+        btnShowFate.setTypeface(CF);
 
-        pickerDate.init(today.get(Calendar.YEAR), today.get(Calendar.MONTH),
-                today.get(Calendar.DAY_OF_MONTH), null);
+        Animation flowLeft = AnimationUtils.loadAnimation(this, R.anim.flow_left);
+        Animation flowRight = AnimationUtils.loadAnimation(this, R.anim.flow_right);
+        Animation fadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out);
+        Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
 
-        btnShowFate = (Button) findViewById(R.id.button);
+        fadeIn.setStartOffset(0);
+        fadeOut.setStartOffset(6000);
+        TextView mainTextFirstOne = (TextView)this.findViewById(R.id.mainText_first_one);
+        mainTextFirstOne.setTypeface(CF);
+        mainTextFirstOne.setAnimation(fadeIn);
+        mainTextFirstOne.setAnimation(fadeOut);
 
+        fadeIn.setStartOffset(2500);
+        fadeOut.setStartOffset(8500);
+        TextView mainTextFirstTwo = (TextView)this.findViewById(R.id.mainText_first_two);
+        mainTextFirstTwo.setTypeface(CF);
+        mainTextFirstTwo.setAnimation(fadeIn);
+        mainTextFirstTwo.setAnimation(fadeOut);
+
+        fadeIn.setStartOffset(5000);
+        fadeOut.setStartOffset(11000);
+        TextView mainTextFirstThree = (TextView)this.findViewById(R.id.mainText_first_three);
+        mainTextFirstThree.setTypeface(CF);
+        mainTextFirstThree.setAnimation(fadeIn);
+        mainTextFirstThree.setAnimation(fadeOut);
+
+        fadeIn.setStartOffset(7500);
+        fadeOut.setStartOffset(13500);
+        TextView mainTextFirstFour = (TextView)this.findViewById(R.id.mainText_first_four);
+        mainTextFirstFour.setTypeface(CF);
+        mainTextFirstFour.setAnimation(fadeIn);
+        mainTextFirstFour.setAnimation(fadeOut);
+
+        fadeIn.setStartOffset(15500);
+        fadeOut.setStartOffset(21000);
+        TextView mainTextFirstLast = (TextView)this.findViewById(R.id.mainText_first_last);
+        mainTextFirstLast.setTypeface(CF);
+        mainTextFirstLast.setAnimation(fadeIn);
+        mainTextFirstLast.setAnimation(fadeOut);
+
+
+        /*fadeIn.setStartOffset(35000);
+        btnShowFate.startAnimation(fadeIn);*/
+
+        // add button listener
         btnShowFate.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View v) {
+            public void onClick(View arg0) {
 
-                Intent intent = new Intent(MainActivity.this, FateActivity.class);
+                // custom dialog
+                final Dialog dialog = new Dialog(context, R.style.mydialogstyle);
+                dialog.setContentView(R.layout.custom_dialog);
 
-                intent.putExtra("FATEbyDATE.fateNum", getFate());
+                ((TextViewPlus) dialog.findViewById(R.id.textView3)).setTypeface(CF);
 
-                startActivity(intent);
+                Button dialogButton = (Button) dialog.findViewById(R.id.show_result_btn);
+                dialogButton.setTypeface(CF);
+
+                pickerDate = (DatePicker) dialog.findViewById(R.id.datePicker);
+
+                Calendar today = Calendar.getInstance();
+
+                pickerDate.init(today.get(Calendar.YEAR), today.get(Calendar.MONTH),
+                        today.get(Calendar.DAY_OF_MONTH), null);
+
+                dialogButton.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+
+                        Intent intent = new Intent(MainActivity.this, FateActivity.class);
+
+                        intent.putExtra("FATEbyDATE.fateNum", getFate());
+
+                        startActivity(intent);
+                    }
+                });
+
+                dialog.show();
             }
         });
+
+        //-------------------------------ADD PLACE-----------------------------------------
 
         AdView adView = (AdView)this.findViewById(R.id.adView);
 
@@ -118,5 +194,6 @@ public class MainActivity extends ActionBarActivity {
 
         return fateNum;
     }
+
 
 }
