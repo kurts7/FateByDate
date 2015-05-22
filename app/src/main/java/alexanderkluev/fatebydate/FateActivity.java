@@ -1,14 +1,21 @@
 package alexanderkluev.fatebydate;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.github.gorbin.asne.core.SocialNetwork;
+import com.github.gorbin.asne.core.listener.OnPostingCompleteListener;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
@@ -20,6 +27,8 @@ public class FateActivity extends Activity {
 
     private Button btnShowMain;
     private InterstitialAd interstitial;
+
+    final String custom_font = "fonts/trajan_ru.ttf";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +54,7 @@ public class FateActivity extends Activity {
     {
         super.onPause();
 
-        //ads 30% of the time :)
+        //ads 10% of the time :)
         int randomNum = 1 + (int)(Math.random()*10);
 
         if(randomNum == 5) {
@@ -85,159 +94,205 @@ public class FateActivity extends Activity {
 
         int fNum = getIntent().getExtras().getInt("FATEbyDATE.fateNum");
 
-        ImageView cardImage = (ImageView)findViewById(R.id.imageView);
-        //TextView cardText = (TextView)findViewById(R.id.textView);
-        TextView titleText = (TextView)findViewById(R.id.textView2);
+        final Typeface CF = Typeface.createFromAsset(getAssets(), custom_font);
 
-        WebView webView = (WebView)findViewById(R.id.textView);
-        String text = "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=windows-1251\"></head><body style=\"text-align:justify\"> %s </body></Html>";
+        ImageView cardImage = (ImageView)findViewById(R.id.imageView);
+        TextView cardText = (TextView)findViewById(R.id.purposeText);
+        cardText.setTypeface(CF);
+        TextView titleText = (TextView)findViewById(R.id.textView2);
+        titleText.setTypeface(CF);
 
         String data = "";
 
         switch (fNum){
             case 1:
                 cardImage.setImageResource(R.drawable.pic1);
-                //cardText.setText(R.string.mage);
-                data = String.valueOf(R.string.mage);
+                cardText.setText(R.string.mage);
+                //data = String.valueOf(R.string.mage);
                 titleText.setText(R.string.mage_title);
                 break;
             case 2:
                 cardImage.setImageResource(R.drawable.pic2);
-                //cardText.setText(R.string.hPriestess);
-                data = this.getString(R.string.hPriestess);
+                cardText.setText(R.string.hPriestess);
+                //data = this.getString(R.string.hPriestess);
                 titleText.setText(R.string.hPriestess_title);
                 break;
             case 3:
                 cardImage.setImageResource(R.drawable.pic3);
-                //cardText.setText(R.string.empress);
-                data = String.valueOf(R.string.empress);
+                cardText.setText(R.string.empress);
+                //data = String.valueOf(R.string.empress);
                 titleText.setText(R.string.empress_title);
                 break;
             case 4:
                 cardImage.setImageResource(R.drawable.pic4);
-                //cardText.setText(R.string.emperor);
-                data = String.valueOf(R.string.emperor);
+                cardText.setText(R.string.emperor);
+                //data = String.valueOf(R.string.emperor);
                 titleText.setText(R.string.emperor_title);
                 break;
             case 5:
                 cardImage.setImageResource(R.drawable.pic5);
-                //cardText.setText(R.string.hierophant);
-                data = String.valueOf(R.string.hierophant);
+                cardText.setText(R.string.hierophant);
+                //data = String.valueOf(R.string.hierophant);
                 titleText.setText(R.string.hierophant_title);
                 break;
             case 6:
                 cardImage.setImageResource(R.drawable.pic6);
-                //cardText.setText(R.string.lovers);
-                data = String.valueOf(R.string.lovers);
+                cardText.setText(R.string.lovers);
+                //data = String.valueOf(R.string.lovers);
                 titleText.setText(R.string.lovers_title);
                 break;
             case 7:
                 cardImage.setImageResource(R.drawable.pic7);
-                //cardText.setText(R.string.chariot);
-                data = String.valueOf(R.string.chariot);
+                cardText.setText(R.string.chariot);
+                //data = String.valueOf(R.string.chariot);
                 titleText.setText(R.string.chariot_title);
                 break;
             case 8:
                 cardImage.setImageResource(R.drawable.pic8);
-                //cardText.setText(R.string.justice);
-                data = String.valueOf(R.string.justice);
+                cardText.setText(R.string.justice);
+                //data = String.valueOf(R.string.justice);
                 titleText.setText(R.string.justice_title);
                 break;
             case 9:
                 cardImage.setImageResource(R.drawable.pic9);
-                //cardText.setText(R.string.hermit);
-                data = String.valueOf(R.string.hermit);
+                cardText.setText(R.string.hermit);
+                //data = String.valueOf(R.string.hermit);
                 titleText.setText(R.string.hermit_title);
                 break;
             case 10:
                 cardImage.setImageResource(R.drawable.pic10);
-                //cardText.setText(R.string.wFortune);
-                data = String.valueOf(R.string.wFortune);
+                cardText.setText(R.string.wFortune);
+                //data = String.valueOf(R.string.wFortune);
                 titleText.setText(R.string.wFortune_title);
                 break;
             case 11:
                 cardImage.setImageResource(R.drawable.pic11);
-                //cardText.setText(R.string.power);
-                data = String.valueOf(R.string.power);
+                cardText.setText(R.string.power);
+                //data = String.valueOf(R.string.power);
                 titleText.setText(R.string.power_title);
                 break;
             case 12:
                 cardImage.setImageResource(R.drawable.pic12);
-                //cardText.setText(R.string.hanged);
-                data = String.valueOf(R.string.hanged);
+                cardText.setText(R.string.hanged);
+                //data = String.valueOf(R.string.hanged);
                 titleText.setText(R.string.hanged_title);
                 break;
             case 13:
                 cardImage.setImageResource(R.drawable.pic13);
-                //cardText.setText(R.string.death);
-                data = String.valueOf(R.string.death);
+                cardText.setText(R.string.death);
+                //data = String.valueOf(R.string.death);
                 titleText.setText(R.string.death_title);
                 break;
             case 14:
                 cardImage.setImageResource(R.drawable.pic14);
-                //cardText.setText(R.string.moderation);
-                data = String.valueOf(R.string.moderation);
+                cardText.setText(R.string.moderation);
+                //data = String.valueOf(R.string.moderation);
                 titleText.setText(R.string.moderation_title);
                 break;
             case 15:
                 cardImage.setImageResource(R.drawable.pic15);
-                //cardText.setText(R.string.devil);
-                data = String.valueOf(R.string.devil);
+                cardText.setText(R.string.devil);
+                //data = String.valueOf(R.string.devil);
                 titleText.setText(R.string.devil_title);
                 break;
             case 16:
                 cardImage.setImageResource(R.drawable.pic16);
-                //cardText.setText(R.string.tower);
-                data = String.valueOf(R.string.tower);
+                cardText.setText(R.string.tower);
+                //data = String.valueOf(R.string.tower);
                 titleText.setText(R.string.tower_title);
                 break;
             case 17:
                 cardImage.setImageResource(R.drawable.pic17);
-                //cardText.setText(R.string.star);
-                data = String.valueOf(R.string.star);
+                cardText.setText(R.string.star);
+                //data = String.valueOf(R.string.star);
                 titleText.setText(R.string.star_title);
                 break;
             case 18:
                 cardImage.setImageResource(R.drawable.pic18);
-                //cardText.setText(R.string.moon);
-                data = String.valueOf(R.string.moon);
+                cardText.setText(R.string.moon);
+                //data = String.valueOf(R.string.moon);
                 titleText.setText(R.string.moon_title);
                 break;
             case 19:
                 cardImage.setImageResource(R.drawable.pic19);
-                //cardText.setText(R.string.sun);
-                data = String.valueOf(R.string.sun);
+                cardText.setText(R.string.sun);
+                //data = String.valueOf(R.string.sun);
                 titleText.setText(R.string.sun_title);
                 break;
             case 20:
                 cardImage.setImageResource(R.drawable.pic20);
-                //cardText.setText(R.string.court);
-                data = String.valueOf(R.string.court);
+                cardText.setText(R.string.court);
+                //data = String.valueOf(R.string.court);
                 titleText.setText(R.string.court_title);
                 break;
             case 21:
                 cardImage.setImageResource(R.drawable.pic21);
-                //cardText.setText(R.string.world);
-                data = String.valueOf(R.string.world);
+                cardText.setText(R.string.world);
+                //data = String.valueOf(R.string.world);
                 titleText.setText(R.string.world_title);
                 break;
             case 22:
                 cardImage.setImageResource(R.drawable.pic22);
-                //cardText.setText(R.string.joker);
-                data = String.valueOf(R.string.joker);
+                cardText.setText(R.string.joker);
+                //data = String.valueOf(R.string.joker);
                 titleText.setText(R.string.joker_title);
                 break;
             default:
                 cardImage.setImageResource(R.drawable.question);
-                //cardText.setText(R.string.unknown);
-                data = String.valueOf(R.string.unknown);
+                cardText.setText(R.string.unknown);
+                //data = String.valueOf(R.string.unknown);
                 titleText.setText(R.string.unknown_title);
                 break;
         }
 
-        webView.loadData(String.format(text, data), "text/html", "utf-8");
+        SocialNetwork socialNetwork = MainFragment.mSocialNetworkManager.getSocialNetwork(networkId);
+
+        Bundle postParams = new Bundle();
+        postParams.putString(SocialNetwork.BUNDLE_LINK, link);
+        socialNetwork.requestPostLink(postParams, message, postingComplete);
+
+        Button share = (Button)findViewById(R.id.vk);
+        share.setOnClickListener(shareClick);
 
     }
+
+    private View.OnClickListener shareClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            AlertDialog.Builder ad = alertDialogInit("Would you like to post Link:", link);
+            ad.setPositiveButton("Post link", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    Bundle postParams = new Bundle();
+                    postParams.putString(SocialNetwork.BUNDLE_LINK, link);
+                    socialNetwork.requestPostLink(postParams, message, postingComplete);
+                }
+            });
+            ad.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int i) {
+                    dialog.cancel();
+                }
+            });
+            ad.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                public void onCancel(DialogInterface dialog) {
+                    dialog.cancel();
+                }
+            });
+            ad.create().show();
+        }
+    };
+
+    private OnPostingCompleteListener postingComplete = new OnPostingCompleteListener() {
+        @Override
+        public void onPostSuccessfully(int socialNetworkID) {
+            Toast.makeText(getActivity(), "Sent", Toast.LENGTH_LONG).show();
+        }
+
+        @Override
+        public void onError(int socialNetworkID, String requestID, String errorMessage, Object data) {
+            Toast.makeText(getActivity(), "Error while sending: " + errorMessage, Toast.LENGTH_LONG).show();
+        }
+    };
 
 }
 

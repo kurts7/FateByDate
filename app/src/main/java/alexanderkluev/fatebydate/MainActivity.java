@@ -29,7 +29,8 @@ public class MainActivity extends ActionBarActivity {
     private Button btnShowFate;
     final Context context = this;
     //final String custom_font = "fonts/xc5CYoHu.ttf";
-    final String custom_font = "fonts/ex_one.ttf";
+    final String custom_font = "fonts/liana.ttf";
+    final String main_font = "fonts/trajan_ru.ttf";
 
     private int year;
     private int month;
@@ -43,6 +44,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         final Typeface CF = Typeface.createFromAsset(getAssets(), custom_font);
+        final Typeface CF2 = Typeface.createFromAsset(getAssets(), main_font);
 
         btnShowFate = (Button) findViewById(R.id.find_your_goal_btn);
         btnShowFate.setTypeface(CF);
@@ -52,14 +54,15 @@ public class MainActivity extends ActionBarActivity {
         Animation fadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out);
         Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
 
-        fadeIn.setStartOffset(0);
+
+        /*fadeIn.setStartOffset(0);
         fadeOut.setStartOffset(6000);
         TextView mainTextFirstOne = (TextView)this.findViewById(R.id.mainText_first_one);
         mainTextFirstOne.setTypeface(CF);
         mainTextFirstOne.setAnimation(fadeIn);
-        mainTextFirstOne.setAnimation(fadeOut);
+        mainTextFirstOne.setAnimation(fadeOut);*/
 
-        fadeIn.setStartOffset(2500);
+        /*fadeIn.setStartOffset(2500);
         fadeOut.setStartOffset(8500);
         TextView mainTextFirstTwo = (TextView)this.findViewById(R.id.mainText_first_two);
         mainTextFirstTwo.setTypeface(CF);
@@ -85,7 +88,7 @@ public class MainActivity extends ActionBarActivity {
         TextView mainTextFirstLast = (TextView)this.findViewById(R.id.mainText_first_last);
         mainTextFirstLast.setTypeface(CF);
         mainTextFirstLast.setAnimation(fadeIn);
-        mainTextFirstLast.setAnimation(fadeOut);
+        mainTextFirstLast.setAnimation(fadeOut);*/
 
 
         /*fadeIn.setStartOffset(35000);
@@ -101,10 +104,10 @@ public class MainActivity extends ActionBarActivity {
                 final Dialog dialog = new Dialog(context, R.style.mydialogstyle);
                 dialog.setContentView(R.layout.custom_dialog);
 
-                ((TextViewPlus) dialog.findViewById(R.id.textView3)).setTypeface(CF);
+                ((TextViewPlus) dialog.findViewById(R.id.textView3)).setTypeface(CF2);
 
                 Button dialogButton = (Button) dialog.findViewById(R.id.show_result_btn);
-                dialogButton.setTypeface(CF);
+                dialogButton.setTypeface(CF2);
 
                 pickerDate = (DatePicker) dialog.findViewById(R.id.datePicker);
 

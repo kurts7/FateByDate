@@ -2,7 +2,7 @@
     <string name="app_name">Предназначение</string>
     <string name="choose_date">Укажите дату Вашего рождения</string>
     <string name="action_exit">Выход</string>
-    <string name="fate2">Узнать предназначение</string>
+    <string name="fate2">Узнать</string>
     <string name="fate_title">Ваше предназначение</string>
 
     <string name="mage_title">Маг</string>
@@ -92,4 +92,5 @@
     <string name="main_text_second_one">Если у Вас уже есть ответы и они вдохновляют Вас каждый день, то значит Вы знаете свое предназначение и Вам остается лишь реализовать его.</string>
     <string name="main_text_second_two">Если же не знаете, то данное приложение, опираясь на дату Вашего роджения поможет определить его.</string>
 
+    <string name="vk_app_id">4928402</string>
 </resources>
