@@ -1,24 +1,28 @@
 package alexanderkluev.fatebydate;
 
 import android.app.Activity;
-import android.app.AlertDialog;
+import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.gorbin.asne.core.SocialNetwork;
 import com.github.gorbin.asne.core.listener.OnPostingCompleteListener;
+import com.github.gorbin.asne.vk.VkSocialNetwork;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.fitness.data.Value;
+import com.vk.sdk.VKScope;
+
+import static alexanderkluev.fatebydate.R.string.vk_app_id;
 
 /**
  * Created by alexander.kluev on 06.05.2015.
@@ -27,8 +31,21 @@ public class FateActivity extends Activity {
 
     private Button btnShowMain;
     private InterstitialAd interstitial;
+    String VK_KEY = String.valueOf(R.string.vk_app_id);
 
     final String custom_font = "fonts/trajan_ru.ttf";
+
+    final String link = "http://google.ru";
+    final String message = "Наконец то это работает!";
+
+    String[] vkScope = new String[] {
+            VKScope.FRIENDS,
+            VKScope.WALL,
+            VKScope.PHOTOS,
+            VKScope.NOHTTPS,
+            VKScope.STATUS,
+    };
+    VkSocialNetwork vkNetwork = new VkSocialNetwork(this, VK_KEY, vkScope);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -245,18 +262,13 @@ public class FateActivity extends Activity {
                 break;
         }
 
-        SocialNetwork socialNetwork = MainFragment.mSocialNetworkManager.getSocialNetwork(networkId);
-
-        Bundle postParams = new Bundle();
-        postParams.putString(SocialNetwork.BUNDLE_LINK, link);
-        socialNetwork.requestPostLink(postParams, message, postingComplete);
 
         Button share = (Button)findViewById(R.id.vk);
         share.setOnClickListener(shareClick);
 
     }
 
-    private View.OnClickListener shareClick = new View.OnClickListener() {
+    public View.OnClickListener shareClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             AlertDialog.Builder ad = alertDialogInit("Would you like to post Link:", link);
@@ -283,14 +295,15 @@ public class FateActivity extends Activity {
     };
 
     private OnPostingCompleteListener postingComplete = new OnPostingCompleteListener() {
+
         @Override
         public void onPostSuccessfully(int socialNetworkID) {
-            Toast.makeText(getActivity(), "Sent", Toast.LENGTH_LONG).show();
+            Toast.makeText(FateActivity.this, "Sent", Toast.LENGTH_LONG).show();
         }
 
         @Override
         public void onError(int socialNetworkID, String requestID, String errorMessage, Object data) {
-            Toast.makeText(getActivity(), "Error while sending: " + errorMessage, Toast.LENGTH_LONG).show();
+            Toast.makeText(FateActivity.this, "Error while sending: " + errorMessage, Toast.LENGTH_LONG).show();
         }
     };
 
